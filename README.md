@@ -1,5 +1,8 @@
 # Celine: The Digital Khata for Indian Vendors 🇮🇳
 
+[![Deploy on Vercel](https://vercel.com/button)](https://celine-app.vercel.app/)
+**Live Demo:** [https://celine-app.vercel.app/](https://celine-app.vercel.app/)
+
 Celine is a highly-resilient, offline-first Point-of-Sale (POS) and Customer Relationship Management (CRM) system built specifically to empower MSMEs and street vendors in India. 
 
 It tackles the unique challenges of local commerce directly out of the box, offering robust **Udhar (Credit) tracking**, crash-safe data integrity, hands-free voice navigation, and a bespoke "Ink and Paper" visual identity tailored for the streets.
