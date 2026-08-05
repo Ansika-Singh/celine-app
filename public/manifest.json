@@ -1,0 +1,21 @@
+{
+  "name": "Celine CRM",
+  "short_name": "Celine",
+  "description": "AI CRM for Indian Businesses",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#141420",
+  "theme_color": "#C9A84C",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
