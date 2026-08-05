@@ -90,67 +90,79 @@ export default function LandingPage() {
 
       </section>
 
-      {/* Marquee */}
-      <div className="w-full overflow-hidden border-y border-white/5 bg-[#050505]/50 backdrop-blur-md py-6 z-10 relative">
-        <p className="text-center text-xs font-bold tracking-widest text-textMuted mb-4 uppercase">Trusted by innovative teams worldwide</p>
-        <div className="flex gap-16 whitespace-nowrap animate-[marquee_30s_linear_infinite] opacity-50 hover:opacity-100 transition-opacity duration-500">
-          {['Acme Corp', 'GlobalTech', 'Nexus Industries', 'Quantum AI', 'Stark Enterprise', 'Acme Corp', 'GlobalTech', 'Nexus Industries', 'Quantum AI', 'Stark Enterprise'].map((logo, i) => (
-            <span key={i} className="text-xl font-display font-bold text-white">{logo}</span>
-          ))}
+      {/* Marquee with Rotating Border */}
+      <div className="w-full relative overflow-hidden mt-10 p-[2px]">
+        {/* Animated Rotating Border Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden rounded-xl">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[500%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#050505_0%,#6D5EF5_40%,#22D3EE_60%,#050505_100%)] opacity-100" />
+        </div>
+        
+        {/* Inner Content (Masks the center, exposing only the glowing border) */}
+        <div className="relative z-10 bg-[#050505]/95 backdrop-blur-3xl py-8 rounded-xl shadow-[0_0_40px_rgba(109,94,245,0.2)]">
+          <p className="text-center text-xs font-bold tracking-widest text-textMuted mb-6 uppercase animate-pulse">Trusted by innovative teams worldwide</p>
+          
+          <div className="relative flex overflow-hidden group">
+            {/* We duplicate the marquee content to ensure seamless infinite scrolling */}
+            <div className="flex gap-16 whitespace-nowrap animate-[marquee_15s_linear_infinite] group-hover:animate-none opacity-80 group-hover:opacity-100 transition-all duration-300 items-center">
+              {['Acme Corp', 'GlobalTech', 'Nexus Industries', 'Quantum AI', 'Stark Enterprise', 'Acme Corp', 'GlobalTech', 'Nexus Industries', 'Quantum AI', 'Stark Enterprise', 'Acme Corp', 'GlobalTech', 'Nexus Industries', 'Quantum AI', 'Stark Enterprise'].map((logo, i) => (
+                <span key={i} className="text-3xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500 tracking-wider hover:scale-125 hover:from-primary hover:to-secondary transition-all duration-300 cursor-default">{logo}</span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Bento Grid Features */}
       <section id="features" className="py-32 px-6 max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Everything you need.<br/>Nothing you don't.</h2>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 animate-pulse">Everything you need.<br/>Nothing you don't.</h2>
           <p className="text-xl text-textMuted max-w-2xl mx-auto">A unified platform that replaces a dozen scattered tools with one elegant, high-performance workspace.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: AI */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            whileHover={{ y: -5 }}
-            className="md:col-span-2 bg-surface border border-white/10 rounded-[2rem] p-10 relative overflow-hidden group"
+            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            whileHover={{ y: -10, scale: 1.02 }}
+            className="md:col-span-2 bg-surface border border-white/10 rounded-[2rem] p-10 relative overflow-hidden group shadow-2xl shadow-primary/5 hover:shadow-primary/20 transition-all duration-500"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-700" />
-            <Bot size={48} className="text-primary mb-6" />
-            <h3 className="text-3xl font-display font-bold mb-4">Autonomous Agents</h3>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/5 to-transparent opacity-50 group-hover:opacity-100 transition duration-700 animate-[pulse_4s_ease-in-out_infinite]" />
+            <Bot size={56} className="text-primary mb-6 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500" />
+            <h3 className="text-3xl font-display font-bold mb-4 group-hover:text-primary transition-colors">Autonomous Agents</h3>
             <p className="text-lg text-textMuted max-w-md">Deploy custom AI agents that understand your business logic and communicate securely with your database.</p>
           </motion.div>
 
           {/* Card 2: Speed */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            whileHover={{ y: -5 }}
-            className="bg-surface border border-white/10 rounded-[2rem] p-10 relative overflow-hidden group"
+            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+            whileHover={{ y: -10, scale: 1.02 }}
+            className="bg-surface border border-white/10 rounded-[2rem] p-10 relative overflow-hidden group shadow-2xl shadow-secondary/5 hover:shadow-secondary/20 transition-all duration-500"
           >
-             <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-700" />
-            <Zap size={48} className="text-secondary mb-6" />
-            <h3 className="text-2xl font-display font-bold mb-4">Edge Native</h3>
+             <div className="absolute inset-0 bg-gradient-to-br from-secondary/30 via-secondary/5 to-transparent opacity-50 group-hover:opacity-100 transition duration-700 animate-[pulse_5s_ease-in-out_infinite]" />
+            <Zap size={56} className="text-secondary mb-6 group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500" />
+            <h3 className="text-2xl font-display font-bold mb-4 group-hover:text-secondary transition-colors">Edge Native</h3>
             <p className="text-textMuted">Sub-50ms latency worldwide with advanced edge routing.</p>
           </motion.div>
 
           {/* Card 3: Cloud Sync */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-            whileHover={{ y: -5 }}
-            className="bg-surface border border-white/10 rounded-[2rem] p-10 relative overflow-hidden group"
+            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+            whileHover={{ y: -10, scale: 1.02 }}
+            className="bg-surface border border-white/10 rounded-[2rem] p-10 relative overflow-hidden group shadow-2xl shadow-accent/5 hover:shadow-accent/20 transition-all duration-500"
           >
-             <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-700" />
-            <Cloud size={48} className="text-accent mb-6" />
-            <h3 className="text-2xl font-display font-bold mb-4">Real-time Sync</h3>
+             <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-accent/5 to-transparent opacity-50 group-hover:opacity-100 transition duration-700 animate-[pulse_6s_ease-in-out_infinite]" />
+            <Cloud size={56} className="text-accent mb-6 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500" />
+            <h3 className="text-2xl font-display font-bold mb-4 group-hover:text-accent transition-colors">Real-time Sync</h3>
             <p className="text-textMuted">Changes instantly propagate across all your devices.</p>
           </motion.div>
 
           {/* Card 4: Dev DX */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-            whileHover={{ y: -5 }}
-            className="md:col-span-2 bg-surface border border-white/10 rounded-[2rem] p-10 relative overflow-hidden group flex flex-col md:flex-row items-center gap-10"
+            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
+            whileHover={{ y: -10, scale: 1.01 }}
+            className="md:col-span-2 bg-surface border border-white/10 rounded-[2rem] p-10 relative overflow-hidden group flex flex-col md:flex-row items-center gap-10 shadow-2xl shadow-danger/5 hover:shadow-danger/20 transition-all duration-500"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-danger/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-br from-danger/30 via-danger/5 to-transparent opacity-50 group-hover:opacity-100 transition duration-700 animate-[pulse_7s_ease-in-out_infinite]" />
             <div className="flex-1">
               <Code size={48} className="text-danger mb-6" />
               <h3 className="text-3xl font-display font-bold mb-4">Developer First</h3>
