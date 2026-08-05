@@ -88,16 +88,17 @@ export default function LandingPage() {
           </motion.div>
         </motion.div>
 
-        {/* Marquee */}
-        <div className="absolute bottom-10 w-full overflow-hidden border-y border-white/5 bg-[#050505]/50 backdrop-blur-md py-6 z-10">
-          <p className="text-center text-xs font-bold tracking-widest text-textMuted mb-4 uppercase">Trusted by innovative teams worldwide</p>
-          <div className="flex gap-16 whitespace-nowrap animate-[marquee_30s_linear_infinite] opacity-50 hover:opacity-100 transition-opacity duration-500">
-            {['Acme Corp', 'GlobalTech', 'Nexus Industries', 'Quantum AI', 'Stark Enterprise', 'Acme Corp', 'GlobalTech', 'Nexus Industries', 'Quantum AI', 'Stark Enterprise'].map((logo, i) => (
-              <span key={i} className="text-xl font-display font-bold text-white">{logo}</span>
-            ))}
-          </div>
-        </div>
       </section>
+
+      {/* Marquee */}
+      <div className="w-full overflow-hidden border-y border-white/5 bg-[#050505]/50 backdrop-blur-md py-6 z-10 relative">
+        <p className="text-center text-xs font-bold tracking-widest text-textMuted mb-4 uppercase">Trusted by innovative teams worldwide</p>
+        <div className="flex gap-16 whitespace-nowrap animate-[marquee_30s_linear_infinite] opacity-50 hover:opacity-100 transition-opacity duration-500">
+          {['Acme Corp', 'GlobalTech', 'Nexus Industries', 'Quantum AI', 'Stark Enterprise', 'Acme Corp', 'GlobalTech', 'Nexus Industries', 'Quantum AI', 'Stark Enterprise'].map((logo, i) => (
+            <span key={i} className="text-xl font-display font-bold text-white">{logo}</span>
+          ))}
+        </div>
+      </div>
 
       {/* Bento Grid Features */}
       <section id="features" className="py-32 px-6 max-w-7xl mx-auto relative z-10">
