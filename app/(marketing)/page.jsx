@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
+import { ShaderAnimation } from '@/components/ui/shader-lines';
 
 export default function LandingPage() {
   const { scrollYProgress } = useScroll();
@@ -26,7 +27,8 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col items-center justify-center pt-20 px-4 text-center">
-        <motion.div style={{ y }} className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-[#050505] to-[#050505]" />
+        <ShaderAnimation />
+        <motion.div style={{ y }} className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/40 via-transparent to-transparent pointer-events-none" />
         
         <motion.div 
           initial="hidden" animate="visible" variants={fadeUp}

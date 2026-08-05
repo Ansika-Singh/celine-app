@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useAppContext } from '@/context/AppContext';
+import { ShaderAnimation } from '@/components/ui/shader-lines';
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -18,10 +19,13 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#050505] text-white font-sans">
+    <div className="min-h-screen flex bg-[#050505] text-white font-sans relative">
+      <ShaderAnimation />
+      <div className="absolute inset-0 bg-[#050505]/60 pointer-events-none z-0" />
+
       {/* Left side: Animated Branding (Hidden on mobile) */}
-      <div className="hidden lg:flex w-1/2 flex-col justify-center items-center relative overflow-hidden border-r border-white/10 p-12">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-900/40 via-[#050505] to-[#050505]" />
+      <div className="hidden lg:flex w-1/2 flex-col justify-center items-center relative overflow-hidden border-r border-white/10 p-12 z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-900/40 via-transparent to-transparent pointer-events-none" />
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}
           className="relative z-10 max-w-md"
@@ -41,7 +45,7 @@ export default function AuthPage() {
       </div>
 
       {/* Right side: Authentication Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 relative">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 relative z-10">
         <div className="w-full max-w-md">
           <AnimatePresence mode="wait">
             <motion.div 
