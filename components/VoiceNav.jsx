@@ -49,7 +49,7 @@ export default function VoiceNav() {
       // Basic routing commands
       if (transcript.includes("dashboard") || transcript.includes("home")) {
         speak("Going to Dashboard");
-        router.push("/");
+        router.push("/dashboard");
       } else if (transcript.includes("customer")) {
         speak("Opening Customers");
         router.push("/customers");

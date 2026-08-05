@@ -6,7 +6,7 @@ import { useAppContext } from "@/context/AppContext";
 import OfflineStamp from "@/components/OfflineStamp";
 
 const NAV = [
-  { id: "/", label: "Dashboard", icon: "⬡", group: "Overview" },
+  { id: "/dashboard", label: "Dashboard", icon: "⬡", group: "Overview" },
   { id: "/analytics", label: "Analytics", icon: "📊", group: "Overview" },
   { id: "/leads", label: "Pipeline", icon: "🎯", group: "Overview" },
   { id: "/customers", label: "Khata (Ledger)", icon: "👥", group: "Manage" },
@@ -55,7 +55,7 @@ export default function Sidebar() {
           <div key={group} className="nav-group">
             {group && <div className="nav-label">{group}</div>}
             {items.map(n => {
-              const isActive = pathname === n.id || (pathname !== "/" && n.id !== "/" && pathname.startsWith(n.id));
+              const isActive = pathname === n.id || (pathname !== "/dashboard" && n.id !== "/dashboard" && pathname.startsWith(n.id));
               return (
                 <Link key={n.id} href={n.id} style={{ textDecoration: "none" }}>
                   <div className={`nav-item ${isActive ? "active" : ""}`}>

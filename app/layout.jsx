@@ -1,6 +1,4 @@
 import { AppProvider } from "@/context/AppContext";
-import Sidebar from "@/components/Sidebar";
-import VoiceNav from "@/components/VoiceNav";
 import GlobalToast from "@/components/GlobalToast";
 import SyncStatus from "@/components/SyncStatus";
 import GlobalPrint from "@/components/GlobalPrint";
@@ -17,18 +15,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#C9A84C" />
+        <meta name="theme-color" content="#14171F" />
       </head>
       <body>
         <AppProvider>
-          <div className="grain" />
-          <div className="app">
-            <Sidebar />
-            <div className="main">
-              {children}
-            </div>
-          </div>
-          <VoiceNav />
+          {children}
           <GlobalToast />
           <SyncStatus />
           <GlobalPrint />

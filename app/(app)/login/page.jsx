@@ -77,7 +77,7 @@ export default function Login() {
     }
     
     setUser({ bizName: "Celine Demo Store", ownerName: role === "Owner" ? "Demo User" : "Cashier Staff", bizType: "Retail", language: "English", role });
-    router.push("/");
+    router.push("/dashboard");
   };
 
   return (
