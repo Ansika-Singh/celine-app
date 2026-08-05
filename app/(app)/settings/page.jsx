@@ -165,9 +165,16 @@ export default function Settings() {
               <div><div className="set-label" style={{ color: "var(--red)" }}>Export All Data</div><div className="set-sub">Download CSV backup</div></div>
               <button className="btn btn-ghost" style={{ fontSize: ".75rem", padding: ".4rem .8rem" }}>Export</button>
             </div>
-            <div className="set-row" style={{ borderBottom: "none" }}>
+            <div className="set-row">
               <div><div className="set-label" style={{ color: "var(--red)" }}>Reset Business Data</div><div className="set-sub">Clear all records</div></div>
               <button className="btn btn-r" style={{ fontSize: ".75rem", padding: ".4rem .8rem" }}>Reset</button>
+            </div>
+            <div className="set-row" style={{ borderBottom: "none" }}>
+              <div><div className="set-label">Log Out</div><div className="set-sub">Sign out of Celine</div></div>
+              <button className="btn btn-ghost" style={{ fontSize: ".75rem", padding: ".4rem .8rem", color: "var(--red)" }} onClick={() => {
+                setUser(null);
+                window.location.href = "/";
+              }}>Log Out</button>
             </div>
           </div>
         </div>
