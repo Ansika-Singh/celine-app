@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../app";
+@source "../components";
 
 @theme {
   --color-background: #070B14;
@@ -13,7 +15,6 @@
   --font-sans: var(--font-inter), sans-serif;
   --font-display: var(--font-space-grotesk), sans-serif;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#14171F;--slate:#14171F;--card:#1B1F2A;--card2:#212634;--card3:#2A3042;
   --gold:#E8A33D;--gold2:#F0B763;--gold-dim:rgba(232, 163, 61, 0.4);--gold-glow:rgba(232, 163, 61, 0.12);--gold-glow2:rgba(232, 163, 61, 0.06);
@@ -22,11 +23,8 @@
   --blue:#5599FF;--blue-bg:rgba(85,153,255,0.1);
   --border:rgba(243, 241, 236, 0.08);--border2:rgba(243, 241, 236, 0.04);
   --radius:12px;--radius-sm:8px;
-  --font-display: 'Fraunces', serif;
-  --font-ui: 'Inter', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
 }
-body{background:var(--bg);color:var(--cream);font-family:var(--font-ui);min-height:100vh;overflow-x:hidden}
+
 .grain{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.15;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");}
 .app{display:flex;min-height:100vh;position:relative;z-index:1}
