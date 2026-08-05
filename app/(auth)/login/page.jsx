@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useAppContext } from '@/context/AppContext';
 import { ShaderAnimation } from '@/components/ui/shader-lines';
+import { CelineLogo } from '@/components/ui/Logo';
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -30,7 +31,7 @@ export default function AuthPage() {
           initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}
           className="relative z-10 max-w-md"
         >
-          <div className="text-4xl font-bold tracking-tighter mb-4">Celine<span className="text-blue-500">.</span></div>
+          <div className="mb-10"><CelineLogo size={48} /></div>
           <h2 className="text-3xl font-semibold mb-6 text-gray-200">Scale your enterprise with intelligent, secure workflows.</h2>
           <div className="flex gap-4 items-center p-4 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm">
             <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center font-bold">
