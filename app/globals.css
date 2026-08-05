@@ -1,8 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+
+@theme {
+  --color-background: #070B14;
+  --color-surface: #0D1117;
+  --color-surfaceLight: #101827;
+  --color-primary: #6D5EF5;
+  --color-secondary: #22D3EE;
+  --color-accent: #00FFB3;
+  --color-danger: #FF5C7A;
+  --color-textMuted: #A0AEC0;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', 'Fraunces', serif;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#14171F;--slate:#14171F;--card:#1B1F2A;--card2:#212634;--card3:#2A3042;
