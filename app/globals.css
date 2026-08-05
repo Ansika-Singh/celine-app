@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -220,3 +224,4 @@ tbody tr:hover td{background:rgba(255,255,255,0.015)}
   .print-only, .print-only * { visibility: visible; }
   .print-only { position: absolute; left: 0; top: 0; width: 100%; }
 }
+

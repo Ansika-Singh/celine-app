@@ -1,115 +1,110 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useAppContext } from "@/context/AppContext";
-import Onboarding from "@/components/Onboarding";
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
-import { SALES_DATA, CATEGORY_DATA, MONTHLY_DATA, GOLD_COLORS } from "@/lib/data";
+import { BarChart, Users, DollarSign, Activity, FileText, Bell } from "lucide-react";
+import Link from "next/link";
 
-const fmt = n => `₹${Number(n).toLocaleString("en-IN")}`;
-const initials = n => n.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
+export default function DashboardPage() {
+  const { user } = useAppContext();
 
-export default function Dashboard() {
-  const { user, setUser, customers, inventory, invoices, expenses, leads } = useAppContext();
+  if (!user) return null; // In real app, middleware handles redirect
 
-  if (!user) return <Onboarding onComplete={setUser} />;
-
-  const totalUdhar = customers.reduce((s, c) => s + c.udhar, 0);
-  const lowStock = inventory.filter(i => i.stock < i.minStock).length;
-  const udharCount = customers.filter(c => c.udhar > 0).length;
-  const newSchemes = 2; // Derived from schemes database
-  const monthRevenue = invoices.filter(i => i.status === "Paid").reduce((s, i) => s + i.amount, 0);
-  const totalExpenses = expenses.reduce((s, e) => s + e.amount, 0);
-  const activeLeadsValue = leads.filter(l => l.status !== "Lost").reduce((s, l) => s + l.value, 0);
+  const stats = [
+    { label: "Total Revenue", value: "₹24,500", icon: <DollarSign size={20} className="text-accent" />, trend: "+12%" },
+    { label: "Active Customers", value: "142", icon: <Users size={20} className="text-secondary" />, trend: "+5%" },
+    { label: "System Health", value: "99.9%", icon: <Activity size={20} className="text-primary" />, trend: "Stable" },
+  ];
 
   return (
-    <div className="page">
-      <div className="ph">
-        <div>
-          <div className="pt">Good morning, {user.ownerName.split(" ")[0]} 👋</div>
-          <div className="ps">{user.bizName} · {new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</div>
-        </div>
-      </div>
-      <div className="sg">
-        {[
-          { icon: "💰", label: "Revenue (June)", value: fmt(monthRevenue), change: "+12% vs May", pos: true },
-          { icon: "🏦", label: "Net Profit", value: fmt(monthRevenue - totalExpenses), change: monthRevenue > totalExpenses ? "Positive" : "Negative", pos: monthRevenue > totalExpenses },
-          { icon: "🎯", label: "Pipeline Value", value: fmt(activeLeadsValue), change: `${leads.length} active leads`, pos: true },
-          { icon: "⚠️", label: "Udhar Pending", value: fmt(totalUdhar), change: `${customers.filter(c => c.udhar > 0).length} customers`, neg: true },
-        ].map(s => (
-          <div key={s.label} className="sc">
-            <div className="sc-icon">{s.icon}</div>
-            <div className="sc-label">{s.label}</div>
-            <div className="sc-value">{s.value}</div>
-            <div className={`sc-change ${s.pos ? "pos" : s.neg ? "neg" : "neu"}`}>{s.change}</div>
-          </div>
+    <div className="p-8 max-w-7xl mx-auto w-full min-h-screen bg-background text-text selection:bg-primary selection:text-white">
+      
+      <header className="flex justify-between items-end mb-10 border-b border-white/10 pb-6">
+        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+          <h1 className="text-4xl font-display font-bold mb-2">Welcome back, {user.ownerName}</h1>
+          <p className="text-textMuted">Here's what's happening with {user.bizName} today.</p>
+        </motion.div>
+        
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="flex gap-4">
+          <button className="p-3 rounded-full bg-surface border border-white/10 hover:bg-surfaceLight transition-colors">
+            <Bell size={20} className="text-textMuted" />
+          </button>
+          <Link href="/settings">
+            <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center text-primary font-bold cursor-pointer hover:bg-primary/30 transition-colors">
+              {user.ownerName.charAt(0)}
+            </div>
+          </Link>
+        </motion.div>
+      </header>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        {stats.map((s, i) => (
+          <motion.div 
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className="p-6 rounded-2xl bg-surfaceLight/40 backdrop-blur-xl border border-white/10"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <div className="w-10 h-10 rounded-xl bg-surface flex items-center justify-center border border-white/5">
+                {s.icon}
+              </div>
+              <div className="text-xs font-semibold px-2 py-1 rounded-md bg-white/5 text-textMuted">
+                {s.trend}
+              </div>
+            </div>
+            <div className="text-3xl font-bold font-display mb-1">{s.value}</div>
+            <div className="text-sm text-textMuted">{s.label}</div>
+          </motion.div>
         ))}
       </div>
-      <div className="g2-3 mb">
-        <div className="card">
-          <div className="st">Weekly Sales vs Expenses</div>
-          <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={SALES_DATA} barGap={4}>
-              <XAxis dataKey="day" tick={{ fill: "#5A5A72", fontSize: 11 }} axisLine={false} tickLine={false} />
-              <YAxis hide />
-              <Tooltip contentStyle={{ background: "#141420", border: "1px solid rgba(201,168,76,.15)", borderRadius: 8, fontSize: 12 }} formatter={(v) => [fmt(v)]} />
-              <Bar dataKey="sales" fill="#C9A84C" radius={[4, 4, 0, 0]} opacity={.85} />
-              <Bar dataKey="expenses" fill="#E05555" radius={[4, 4, 0, 0]} opacity={.6} />
-            </BarChart>
-          </ResponsiveContainer>
-          <div style={{ display: "flex", gap: "1.25rem", marginTop: ".75rem" }}>
-            {[{ c: "#C9A84C", l: "Sales" }, { c: "#E05555", l: "Expenses" }].map(i => (
-              <div key={i.l} style={{ display: "flex", alignItems: "center", gap: ".4rem", fontSize: ".7rem", color: "var(--muted2)" }}>
-                <div style={{ width: 10, height: 10, borderRadius: 2, background: i.c }} />
-                {i.l}
-              </div>
-            ))}
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Main Chart Area */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4 }}
+          className="lg:col-span-2 p-6 rounded-2xl bg-surfaceLight/40 backdrop-blur-xl border border-white/10 min-h-[400px] flex flex-col"
+        >
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-bold font-display">Revenue Overview</h2>
+            <button className="text-sm text-primary hover:underline">View Report</button>
           </div>
-        </div>
-        <div className="card">
-          <div className="st">Sales by Category</div>
-          <ResponsiveContainer width="100%" height={160}>
-            <PieChart>
-              <Pie data={CATEGORY_DATA} cx="50%" cy="50%" innerRadius={45} outerRadius={70} paddingAngle={3} dataKey="value">
-                {CATEGORY_DATA.map((_, i) => <Cell key={i} fill={GOLD_COLORS[i % GOLD_COLORS.length]} />)}
-              </Pie>
-              <Tooltip contentStyle={{ background: "#141420", border: "1px solid rgba(201,168,76,.15)", borderRadius: 8, fontSize: 12 }} formatter={(v) => [`${v}%`]} />
-            </PieChart>
-          </ResponsiveContainer>
-          <div style={{ display: "flex", flexDirection: "column", gap: ".3rem", marginTop: ".5rem" }}>
-            {CATEGORY_DATA.map((c, i) => (
-              <div key={c.name} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: ".7rem" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: ".4rem", color: "var(--muted2)" }}>
-                  <div style={{ width: 8, height: 8, borderRadius: 2, background: GOLD_COLORS[i % 5] }} />{c.name}
+          
+          <div className="flex-1 border border-white/5 border-dashed rounded-xl flex items-center justify-center bg-surface/30">
+            <BarChart size={48} className="text-textMuted/30" />
+            <span className="ml-4 text-textMuted font-medium">Recharts Integration Pending</span>
+          </div>
+        </motion.div>
+
+        {/* Recent Activity */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5 }}
+          className="p-6 rounded-2xl bg-surfaceLight/40 backdrop-blur-xl border border-white/10"
+        >
+          <h2 className="text-xl font-bold font-display mb-6">Recent Files</h2>
+          
+          <div className="space-y-4">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="flex items-center gap-4 p-3 rounded-xl hover:bg-surface transition-colors cursor-pointer border border-transparent hover:border-white/5">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                  <FileText size={18} className="text-accent" />
                 </div>
-                <span style={{ color: "var(--cream)", fontWeight: 500 }}>{c.value}%</span>
+                <div>
+                  <div className="text-sm font-semibold">Q3_Analysis_v{i}.pdf</div>
+                  <div className="text-xs text-textMuted">2 hours ago</div>
+                </div>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-      <div className="g2">
-        <div className="card">
-          <div className="st">Recent Customers</div>
-          {customers.slice(0, 5).map(c => (
-            <div key={c.id} style={{ display: "flex", alignItems: "center", gap: ".75rem", padding: ".6rem 0", borderBottom: "1px solid var(--border2)" }}>
-              <div className="u-avatar" style={{ width: 36, height: 36, fontSize: ".72rem" }}>{initials(c.name)}</div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: ".83rem", color: "var(--cream)" }}>{c.name}</div>
-                <div style={{ fontSize: ".68rem", color: "var(--muted2)" }}>{c.lastVisit}</div>
-              </div>
-              {c.udhar > 0 ? <span style={{ fontSize: ".78rem", color: "var(--red)", fontWeight: 500 }}>{fmt(c.udhar)}</span> : <span style={{ fontSize: ".7rem", color: "var(--green)" }}>Clear</span>}
-            </div>
-          ))}
-        </div>
-        <div className="card">
-          <div className="st">AI Business Alerts</div>
-          <div style={{ display: "flex", flexDirection: "column", gap: ".5rem" }}>
-            {lowStock > 0 && <div style={{ padding: "1rem", background: "rgba(224, 76, 76, 0.1)", borderLeft: "4px solid var(--red)", borderRadius: "4px" }}>⚠️ {lowStock} items are low on stock. Restock soon to prevent lost sales.</div>}
-            {udharCount > 0 && <div style={{ padding: "1rem", background: "rgba(201, 168, 76, 0.1)", borderLeft: "4px solid var(--gold)", borderRadius: "4px" }}>💰 {udharCount} customers have pending Udhar. Send WhatsApp reminders.</div>}
-            {newSchemes > 0 && <div style={{ padding: "1rem", background: "rgba(76, 175, 80, 0.1)", borderLeft: "4px solid var(--green)", borderRadius: "4px" }}>📋 {newSchemes} government schemes match your profile (Yojana Sahayak). Check eligibility!</div>}
-            {lowStock === 0 && udharCount === 0 && <div style={{ padding: "1rem", color: "var(--muted2)" }}>All systems normal. No pending alerts.</div>}
-          </div>
-        </div>
+        </motion.div>
+
       </div>
     </div>
   );
