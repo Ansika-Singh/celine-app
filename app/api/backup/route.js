@@ -3,7 +3,7 @@ import { db } from '@/lib/db';
 
 export async function GET() {
   try {
-    const data = db.getFullState();
+    const data = await db.getFullState();
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch backup' }, { status: 500 });
@@ -19,7 +19,7 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Invalid backup file structure' }, { status: 400 });
     }
     
-    db.overwriteState(data);
+    await db.overwriteState(data);
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to restore backup' }, { status: 500 });

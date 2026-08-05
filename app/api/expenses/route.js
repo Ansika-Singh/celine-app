@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
 export async function GET() {
-  return NextResponse.json(db.get('expenses'));
+  return NextResponse.json(await db.get('expenses'));
 }
 
 export async function POST(req) {
@@ -15,7 +15,7 @@ export async function POST(req) {
     return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
   }
 
-  const newItem = db.insert('expenses', data);
+  const newItem = await db.insert('expenses', data);
   return NextResponse.json(newItem);
 }
 
@@ -27,7 +27,7 @@ export async function PUT(req) {
     return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
   }
 
-  const updatedItem = db.update('expenses', id, updates);
+  const updatedItem = await db.update('expenses', id, updates);
   if (!updatedItem) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(updatedItem);
 }

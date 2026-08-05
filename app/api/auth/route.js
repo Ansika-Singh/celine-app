@@ -7,7 +7,7 @@ const LOCKOUT_TIME = 5 * 60 * 1000; // 5 minutes
 export async function POST(request) {
   try {
     const { pin } = await request.json();
-    const auth = db.getAuth();
+    const auth = await db.getAuth();
 
     // 1. Check if currently locked out
     if (auth.lockoutUntil && auth.lockoutUntil > Date.now()) {
@@ -25,13 +25,13 @@ export async function POST(request) {
     if (auth.lockoutUntil && auth.lockoutUntil <= Date.now()) {
       auth.failedAttempts = 0;
       auth.lockoutUntil = null;
-      db.updateAuth(auth);
+      await db.updateAuth(auth);
     }
 
     // 2. Verify PIN
     if (pin === auth.pin) {
       // Success: Reset state
-      db.updateAuth({ failedAttempts: 0, lockoutUntil: null });
+      await db.updateAuth({ failedAttempts: 0, lockoutUntil: null });
       return NextResponse.json({ success: true });
     }
 
@@ -43,7 +43,7 @@ export async function POST(request) {
       newLockout = Date.now() + LOCKOUT_TIME;
     }
 
-    db.updateAuth({ 
+    await db.updateAuth({ 
       failedAttempts: newAttempts, 
       lockoutUntil: newLockout 
     });

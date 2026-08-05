@@ -2,18 +2,18 @@ import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
 export async function GET() {
-  return NextResponse.json(db.get('leads'));
+  return NextResponse.json(await db.get('leads'));
 }
 
 export async function POST(req) {
   const data = await req.json();
-  const newItem = db.insert('leads', data);
+  const newItem = await db.insert('leads', data);
   return NextResponse.json(newItem);
 }
 
 export async function PUT(req) {
   const data = await req.json();
   const { id, ...updates } = data;
-  const updatedItem = db.update('leads', id, updates);
+  const updatedItem = await db.update('leads', id, updates);
   return NextResponse.json(updatedItem);
 }

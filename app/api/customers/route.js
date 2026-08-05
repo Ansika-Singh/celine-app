@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
 export async function GET() {
-  return NextResponse.json(db.get('customers'));
+  return NextResponse.json(await db.get('customers'));
 }
 
 export async function POST(req) {
@@ -18,7 +18,7 @@ export async function POST(req) {
     return NextResponse.json({ error: "Invalid status" }, { status: 400 });
   }
 
-  const newItem = db.insert('customers', data);
+  const newItem = await db.insert('customers', data);
   return NextResponse.json(newItem);
 }
 
@@ -33,7 +33,7 @@ export async function PUT(req) {
     return NextResponse.json({ error: "Invalid udhar amount" }, { status: 400 });
   }
 
-  const updatedItem = db.update('customers', id, updates);
+  const updatedItem = await db.update('customers', id, updates);
   if (!updatedItem) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(updatedItem);
 }
