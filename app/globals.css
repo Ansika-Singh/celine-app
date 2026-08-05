@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
 
 @theme {
   --color-background: #070B14;
@@ -11,8 +11,8 @@
   --color-danger: #FF5C7A;
   --color-textMuted: #A0AEC0;
   
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Space Grotesk', 'Fraunces', serif;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-display: var(--font-space-grotesk), sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
