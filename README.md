@@ -4,6 +4,13 @@ Celine is a highly-resilient, offline-first Point-of-Sale (POS) and Customer Rel
 
 It tackles the unique challenges of local commerce directly out of the box, offering robust **Udhar (Credit) tracking**, crash-safe data integrity, hands-free voice navigation, and a bespoke "Ink and Paper" visual identity tailored for the streets.
 
+## 📖 About Celine
+
+Celine was conceived to bridge the digital divide for millions of unorganized sector retailers in India. While modern SaaS products assume stable 5G connections and English fluency, real-world Indian street vendors operate in crowded, low-bandwidth environments with unique business models like high-trust credit (Udhar). 
+
+Celine provides a familiar "Digital Khata" (Ledger) experience that respects the realities of street commerce. By combining cutting-edge Web APIs (Service Workers, IndexedDB, Speech Recognition) with a fallback AI architecture, it delivers enterprise-grade reliability and intelligence without the enterprise learning curve.
+
+
 ## 🚀 Core Features
 
 ### 1. Hardened Offline-First Architecture
