@@ -168,13 +168,28 @@ export default function LandingPage() {
               <h3 className="text-3xl font-display font-bold mb-4">Developer First</h3>
               <p className="text-lg text-textMuted">Integrate Celine into your existing stack with our REST API, Webhooks, and typed SDKs.</p>
             </div>
-            <div className="w-full md:w-1/2 h-48 bg-[#050505] rounded-xl border border-white/10 p-4 font-mono text-xs text-textMuted flex flex-col justify-center">
-              <span className="text-primary">import</span> &#123; CelineClient &#125; <span className="text-primary">from</span> '@celine/sdk';<br/><br/>
-              <span className="text-secondary">const</span> client = <span className="text-primary">new</span> CelineClient('api_key');<br/><br/>
-              <span className="text-secondary">await</span> client.agents.<span className="text-accent">deploy</span>(&#123;<br/>
-              &nbsp;&nbsp;name: 'SalesBot',<br/>
-              &nbsp;&nbsp;model: 'gpt-4'<br/>
-              &#125;);
+            <div className="w-full md:w-3/5 bg-[#050505]/80 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(255,92,122,0.15)] relative">
+              {/* Mac Terminal Header */}
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-white/5">
+                <div className="w-3 h-3 rounded-full bg-red-500/80 shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80 shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
+                <div className="w-3 h-3 rounded-full bg-green-500/80 shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+                <span className="text-[10px] font-mono text-white/30 ml-2 uppercase tracking-widest font-bold">deploy.ts</span>
+              </div>
+              
+              {/* Code Content */}
+              <div className="p-6 font-mono text-sm md:text-base text-gray-300 flex flex-col whitespace-pre overflow-x-auto leading-relaxed relative z-10">
+                <div><span className="text-primary font-semibold">import</span> &#123; CelineClient &#125; <span className="text-primary font-semibold">from</span> <span className="text-green-400">"@celine/sdk"</span>;</div>
+                <div className="mt-4"><span className="text-secondary font-semibold">const</span> client = <span className="text-primary font-semibold">new</span> CelineClient(<span className="text-green-400">"sk_live_..."</span>);</div>
+                <div className="mt-4"><span className="text-secondary font-semibold">await</span> client.agents.<span className="text-accent font-semibold">deploy</span>(&#123;</div>
+                <div>&nbsp;&nbsp;name: <span className="text-green-400">"EnterpriseBot"</span>,</div>
+                <div>&nbsp;&nbsp;model: <span className="text-green-400">"gpt-4-turbo"</span>,</div>
+                <div>&nbsp;&nbsp;capabilities: [<span className="text-green-400">"sql"</span>, <span className="text-green-400">"crm"</span>]</div>
+                <div>&#125;);</div>
+              </div>
+              
+              {/* Decorative Glow inside terminal */}
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-danger/20 rounded-full blur-[60px] pointer-events-none" />
             </div>
           </motion.div>
         </div>
