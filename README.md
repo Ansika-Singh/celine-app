@@ -77,3 +77,8 @@ graph TD
    ```
 
 3. Open [http://localhost:3000](http://localhost:3000) in your browser. Login as Owner with PIN `1234`.
+
+## 👥 Team & Contributors
+
+* **[Ansika2004](https://github.com/Ansika2004)** - Full Stack Developer
+* **[bishnu24ise-prog](https://github.com/bishnu24ise-prog)** - AI Agent and Backend Developer
